@@ -1363,81 +1363,189 @@
     </section>
 
     <!-- Footer -->
-    <footer style="background: #0f172a" class="border-t border-slate-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <footer
+      class="relative overflow-hidden bg-slate-900 border-t border-slate-800 pt-16 md:pt-24 pb-8"
+    >
+      <!-- Decorative background glow -->
+      <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none -mt-40"
+        style="
+          background: radial-gradient(
+            circle,
+            rgba(26, 86, 219, 0.08) 0%,
+            rgba(15, 23, 42, 0) 70%
+          );
+        "
+      ></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16"
+        >
           <!-- Col 1: Brand -->
-          <div>
-            <div class="bg-white rounded-lg px-2 py-1 inline-block mb-4">
+          <div class="lg:col-span-1 fade-up">
+            <a
+              href="#"
+              class="bg-white rounded-2xl px-4 py-3 inline-flex items-center mb-6 hover:shadow-lg hover:shadow-white/10 transition duration-300"
+            >
               <img
                 src="logo.jpg"
                 alt="JJ's Car Wash"
-                class="h-8 w-auto object-contain"
+                class="h-10 w-auto object-contain"
               />
-            </div>
-            <p class="text-slate-400 text-sm leading-relaxed">
+            </a>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6 lg:pr-4">
               Oxford's premier hand car wash, located at Kassam Stadium.
-              Professional results, every time.
+              Professional results, zero compromises, every single time.
             </p>
+            <div class="flex items-center gap-3">
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-primary hover:border-primary hover:text-white hover:-translate-y-1 transition duration-300"
+              >
+                <i class="fa-brands fa-facebook-f text-sm"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-primary hover:border-primary hover:text-white hover:-translate-y-1 transition duration-300"
+              >
+                <i class="fa-brands fa-instagram text-sm"></i>
+              </a>
+            </div>
           </div>
+
           <!-- Col 2: Quick links -->
-          <div>
+          <div class="lg:ml-12 fade-up">
             <h4
-              class="font-heading font-bold text-white mb-4 text-sm uppercase tracking-widest"
+              class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-wider"
             >
               Quick Links
             </h4>
-            <ul class="space-y-2 text-sm">
+            <ul class="space-y-4 text-sm">
               <li>
                 <a
                   href="#services"
-                  class="text-slate-400 hover:text-white transition"
-                  >Services & Pricing</a
+                  class="text-slate-400 hover:text-white transition duration-300 flex items-center gap-3 group"
                 >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-primary group-hover:scale-150 transition duration-300"
+                  ></span>
+                  Services & Pricing
+                </a>
               </li>
               <li>
                 <a
                   href="#reviews"
-                  class="text-slate-400 hover:text-white transition"
-                  >Customer Reviews</a
+                  class="text-slate-400 hover:text-white transition duration-300 flex items-center gap-3 group"
                 >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-primary group-hover:scale-150 transition duration-300"
+                  ></span>
+                  Customer Reviews
+                </a>
               </li>
               <li>
                 <a
                   href="#location"
-                  class="text-slate-400 hover:text-white transition"
-                  >Location & Hours</a
+                  class="text-slate-400 hover:text-white transition duration-300 flex items-center gap-3 group"
                 >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-primary group-hover:scale-150 transition duration-300"
+                  ></span>
+                  Location Map
+                </a>
               </li>
             </ul>
           </div>
+
           <!-- Col 3: Contact -->
-          <div>
+          <div class="fade-up">
             <h4
-              class="font-heading font-bold text-white mb-4 text-sm uppercase tracking-widest"
+              class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-wider"
             >
-              Get In Touch
+              Contact Us
             </h4>
-            <ul class="space-y-3 text-sm">
-              <li class="flex items-center gap-2 text-slate-400">
-                <i class="fa-solid fa-phone text-primary w-4"> </i> 07404 995853
+            <ul class="space-y-5 text-sm">
+              <li>
+                <a
+                  href="tel:07404995853"
+                  class="flex items-start gap-4 text-slate-400 hover:text-white transition group"
+                >
+                  <div
+                    class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white group-hover:border-primary transition duration-300 shrink-0 shadow-inner"
+                  >
+                    <i class="fa-solid fa-phone text-xs"></i>
+                  </div>
+                  <div class="pt-2 font-medium">07404 995853</div>
+                </a>
               </li>
-              <li class="flex items-center gap-2 text-slate-400">
-                <i class="fa-solid fa-map-pin text-primary w-4"> </i> Kassam
-                Stadium, Oxford OX4 4XP
-              </li>
-              <li class="flex items-center gap-2 text-slate-400">
-                <i class="fa-solid fa-clock text-primary w-4"> </i> Open daily
-                from 9:00 AM
+              <li>
+                <a
+                  href="https://maps.google.com/?q=Kassam+Stadium+Oxford"
+                  target="_blank"
+                  class="flex items-start gap-4 text-slate-400 hover:text-white transition group"
+                >
+                  <div
+                    class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white group-hover:border-primary transition duration-300 shrink-0 shadow-inner"
+                  >
+                    <i class="fa-solid fa-map-location-dot text-xs"></i>
+                  </div>
+                  <div class="pt-1 leading-relaxed">
+                    Kassam Stadium, Grenoble Rd<br />Oxford OX4 4XP
+                  </div>
+                </a>
               </li>
             </ul>
+          </div>
+
+          <!-- Col 4: Hours -->
+          <div class="fade-up">
+            <h4
+              class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-wider"
+            >
+              Opening Hours
+            </h4>
+            <div
+              class="bg-slate-800/40 backdrop-blur-sm rounded-2xl p-5 border border-slate-700/50 shadow-xl"
+            >
+              <ul class="space-y-3 text-sm">
+                <li class="flex justify-between items-center text-slate-300">
+                  <span>Mon - Sat</span>
+                  <span class="font-semibold text-white">9:00 - 18:00</span>
+                </li>
+                <li
+                  class="flex justify-between items-center text-slate-300 border-t border-slate-700/50 pt-3"
+                >
+                  <span>Sunday</span>
+                  <span class="font-semibold text-white">9:00 - 17:00</span>
+                </li>
+              </ul>
+              <div class="mt-4 pt-4 border-t border-slate-700/50">
+                <span
+                  class="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-bold px-3 py-1.5 rounded-lg w-full justify-center shadow-inner"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)] animate-pulse"
+                  ></span>
+                  No Booking Needed
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="border-t border-slate-800 py-5 text-center text-slate-600 text-xs"
-      >
-        &copy; 2026 JJ's Car Wash, Oxford. All rights reserved.
+
+        <!-- Bottom Bar -->
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-slate-800/80"
+        >
+          <div class="text-slate-500 text-sm font-medium">
+            &copy; 2026 JJ's Car Wash. All rights reserved.
+          </div>
+          <div class="text-slate-500 text-sm flex gap-6 font-medium">
+            <a href="#" class="hover:text-white transition">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition">Terms of Service</a>
+          </div>
+        </div>
       </div>
     </footer>
 
