@@ -232,76 +232,58 @@
   >
     <!-- Navigation -->
     <nav
-      style="
-        background: rgba(15, 23, 42, 0.95);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        position: sticky;
-        top: 0;
-        z-index: 50;
-      "
+      class="fixed top-0 left-0 right-0 z-50 pt-4 px-4 transition-all duration-300"
     >
       <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-3"
+        class="max-w-6xl mx-auto bg-[#0f172a]/80 backdrop-blur-xl border border-white/10 rounded-[1.5rem] md:rounded-full shadow-2xl flex justify-between items-center py-2.5 px-3 md:px-4"
       >
+        <!-- Logo -->
         <div class="flex items-center gap-3">
           <a
             href="#"
-            style="
-              display: flex;
-              align-items: center;
-              background: #fff;
-              border-radius: 8px;
-              padding: 4px 10px;
-              text-decoration: none;
-            "
+            class="flex items-center bg-white rounded-xl md:rounded-full px-2.5 py-1.5 transition duration-300 hover:shadow-lg hover:shadow-white/20"
           >
             <img
               src="logo.jpg"
               alt="JJ's Car Wash"
-              style="
-                height: 38px;
-                width: auto;
-                display: block;
-                object-fit: contain;
-              "
+              class="h-8 md:h-9 w-auto object-contain"
             />
           </a>
           <span
-            style="
-              color: #fff;
-              font-family: &quot;Syne&quot;, sans-serif;
-              font-weight: 700;
-              font-size: 1.1rem;
-              letter-spacing: -0.01em;
-            "
-            class="hidden sm:block"
-            >JJ's Car Wash</span
+            class="hidden lg:block text-white font-heading font-black text-lg tracking-tight"
           >
+            JJ's Car Wash
+          </span>
         </div>
-        <div class="hidden md:flex space-x-8">
+
+        <!-- Desktop Links Pill -->
+        <div
+          class="hidden md:flex items-center space-x-1 bg-white/5 border border-white/10 rounded-full px-1.5 py-1.5"
+        >
           <a
             href="#services"
-            class="text-gray-300 hover:text-white font-medium transition text-sm tracking-wide"
+            class="text-slate-300 hover:text-white hover:bg-white/10 font-medium transition duration-300 text-sm tracking-wide px-5 py-2 rounded-full"
             >Services</a
           >
           <a
             href="#reviews"
-            class="text-gray-300 hover:text-white font-medium transition text-sm tracking-wide"
+            class="text-slate-300 hover:text-white hover:bg-white/10 font-medium transition duration-300 text-sm tracking-wide px-5 py-2 rounded-full"
             >Reviews</a
           >
           <a
             href="#location"
-            class="text-gray-300 hover:text-white font-medium transition text-sm tracking-wide"
+            class="text-slate-300 hover:text-white hover:bg-white/10 font-medium transition duration-300 text-sm tracking-wide px-5 py-2 rounded-full"
             >Contact</a
           >
         </div>
+
+        <!-- Call Button -->
         <a
           href="tel:07404995853"
-          class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-secondary transition text-sm"
+          class="btn-shimmer flex items-center gap-2 bg-primary text-white px-5 md:px-6 py-2.5 md:py-3 rounded-xl md:rounded-full font-bold hover:bg-secondary hover:scale-105 transition-all duration-300 shadow-lg shadow-primary/40 text-sm"
         >
-          <i class="fa-solid fa-phone text-xs"> </i> 07404 995853
+          <i class="fa-solid fa-phone text-xs"></i>
+          <span>07404 995853</span>
         </a>
       </div>
     </nav>
