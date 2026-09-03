@@ -306,13 +306,7 @@
     </nav>
     <!-- Hero Section -->
     <section
-      class="hero-carousel text-white px-4 sm:px-6 lg:px-8"
-      style="
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      "
+      class="hero-carousel text-white relative w-full h-[100dvh] min-h-[100vh] flex flex-col justify-center px-4 sm:px-6 lg:px-8"
     >
       <!-- Background slides -->
       <div
@@ -335,54 +329,71 @@
         class="hero-slide"
         style="background-image: url(&quot;hero5.jpg&quot;)"
       ></div>
+
       <!-- Deep navy overlay -->
       <div class="hero-overlay"></div>
+
       <!-- Content -->
-      <div class="hero-content max-w-7xl mx-auto text-center">
+      <div
+        class="hero-content max-w-7xl mx-auto text-center w-full mt-10 md:mt-0"
+      >
         <!-- Star badge with glow -->
         <div
-          class="fade-up-1 inline-flex items-center gap-2 star-badge bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 border border-white/30"
+          class="fade-up-1 inline-flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 star-badge bg-white/10 sm:bg-white/20 backdrop-blur-md px-4 sm:px-5 py-2 rounded-2xl sm:rounded-full mb-6 sm:mb-8 border border-white/20 sm:border-white/30 mx-auto w-fit"
         >
-          <div class="flex text-yellow-400 text-sm">
-            <i class="fa-solid fa-star"> </i> <i class="fa-solid fa-star"> </i>
-            <i class="fa-solid fa-star"> </i> <i class="fa-solid fa-star"> </i>
-            <i class="fa-solid fa-star-half-stroke"> </i>
+          <div class="flex text-yellow-400 text-xs sm:text-sm">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+            ><i class="fa-solid fa-star-half-stroke"></i>
           </div>
-          <span class="text-sm font-semibold"
-            >4.5 (479 Reviews) · Oxford's Best</span
+          <span
+            class="text-xs sm:text-sm font-semibold tracking-wide text-white/90"
+            >4.5 (479 Reviews) <span class="hidden sm:inline">•</span
+            ><span class="sm:hidden block h-px w-full bg-white/20 my-1"></span>
+            Oxford's Best</span
           >
         </div>
+
         <!-- Heading -->
-        <h1 class="fade-up-2 hero-heading text-4xl md:text-6xl mb-4">
-          Premium Car Care in Oxford
+        <h1
+          class="fade-up-2 hero-heading text-5xl sm:text-5xl md:text-6xl lg:text-7xl mb-5 sm:mb-6 leading-[1.1] px-2"
+        >
+          Premium Car Care<br class="hidden sm:block" />
+          in Oxford
         </h1>
+
         <!-- Travelling accent line -->
-        <div class="fade-up-2 accent-line"></div>
+        <div class="fade-up-2 accent-line mb-6 sm:mb-8"></div>
+
         <!-- Subheading -->
         <p
-          class="fade-up-3 text-xl md:text-2xl mb-10 text-blue-100 max-w-3xl mx-auto"
+          class="fade-up-3 text-lg sm:text-xl md:text-2xl mb-10 sm:mb-12 text-blue-100 max-w-3xl mx-auto leading-relaxed px-2"
         >
           Professional exterior washing, detailed interior valets, and friendly
           service you can trust.<br class="hidden md:block" />
           Visit us at Kassam Stadium today!
         </p>
+
         <!-- CTAs -->
-        <div class="fade-up-4 flex flex-col sm:flex-row justify-center gap-4">
+        <div
+          class="fade-up-4 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5 px-6 sm:px-0 w-full sm:w-auto"
+        >
           <a
             href="#location"
-            class="btn-shimmer bg-white text-primary px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-xl"
+            class="btn-shimmer bg-white text-primary px-8 py-4 sm:py-3.5 rounded-xl sm:rounded-full font-bold text-base sm:text-lg hover:bg-gray-100 transition shadow-xl w-full sm:w-auto text-center flex items-center justify-center gap-2"
           >
-            <i class="fa-solid fa-location-dot mr-2"> </i> Get Directions
+            <i class="fa-solid fa-location-dot"></i> Get Directions
           </a>
           <a
             href="#services"
-            class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white/10 transition"
+            class="bg-transparent border-2 border-white/80 hover:border-white text-white px-8 py-4 sm:py-3.5 rounded-xl sm:rounded-full font-bold text-base sm:text-lg hover:bg-white/10 transition w-full sm:w-auto text-center flex items-center justify-center gap-2"
           >
             View Services
           </a>
         </div>
       </div>
     </section>
+
     <!-- Carousel JS -->
     <script>
       (function () {
@@ -395,6 +406,7 @@
         }, 5000);
       })();
     </script>
+
     <!-- Highlights Section -->
     <section class="py-0 overflow-hidden" style="background: #0f172a">
       <div class="max-w-7xl mx-auto">
