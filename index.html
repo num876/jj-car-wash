@@ -1,0 +1,1522 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JJ's Car Wash | Oxford's Premier Hand Car Wash</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1a56db",
+              secondary: "#1e40af",
+              dark: "#0f172a",
+            },
+            fontFamily: {
+              heading: ["Syne", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* ── Carousel ── */
+      .hero-carousel {
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.2s ease-in-out;
+        z-index: 0;
+      }
+      .hero-slide.active {
+        opacity: 1;
+      }
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          160deg,
+          rgba(10, 28, 110, 0.88) 0%,
+          rgba(15, 40, 160, 0.82) 100%
+        );
+        z-index: 1;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+      /* ── Gradient fade border at hero bottom ── */
+      .hero-fade-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: linear-gradient(to bottom, transparent, #f9fafb);
+        z-index: 3;
+      }
+      /* ── Headline fade-up ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(28px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-up-1 {
+        animation: fadeUp 0.7s ease-out 0.1s both;
+      }
+      .fade-up-2 {
+        animation: fadeUp 0.7s ease-out 0.3s both;
+      }
+      .fade-up-3 {
+        animation: fadeUp 0.7s ease-out 0.5s both;
+      }
+      .fade-up-4 {
+        animation: fadeUp 0.7s ease-out 0.7s both;
+      }
+      /* ── Star badge glow ── */
+      @keyframes starGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 0px rgba(250, 204, 21, 0);
+        }
+        50% {
+          box-shadow: 0 0 18px 4px rgba(250, 204, 21, 0.35);
+        }
+      }
+      .star-badge {
+        animation: starGlow 2.8s ease-in-out infinite;
+      }
+      /* ── Shimmer sweep on primary button ── */
+      .btn-shimmer {
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-shimmer::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.45) 50%,
+          transparent 100%
+        );
+        animation: shimmerSweep 3.5s ease-in-out 1.2s infinite;
+      }
+      @keyframes shimmerSweep {
+        0% {
+          left: -100%;
+        }
+        40% {
+          left: 140%;
+        }
+        100% {
+          left: 140%;
+        }
+      }
+      /* ── Heading electric glow ── */
+      .hero-heading {
+        text-shadow:
+          0 0 40px rgba(96, 165, 250, 0.4),
+          0 2px 4px rgba(0, 0, 0, 0.3);
+        letter-spacing: -0.02em;
+        font-weight: 900;
+      }
+      /* ── Travelling accent line ── */
+      .accent-line {
+        position: relative;
+        overflow: hidden;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 999px;
+        margin: 0 auto 28px;
+        width: 80px;
+      }
+      .accent-line::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -40%;
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          #93c5fd,
+          white,
+          #93c5fd,
+          transparent
+        );
+        animation: lineBeam 2.5s ease-in-out infinite;
+      }
+      @keyframes lineBeam {
+        0% {
+          left: -40%;
+        }
+        100% {
+          left: 140%;
+        }
+      }
+      /* ── Global typography ── */
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Syne", sans-serif;
+      }
+      /* ── Sticky nav ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      /* Scroll Fade Animations */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .stagger-1 {
+        transition-delay: 0.1s;
+      }
+      .stagger-2 {
+        transition-delay: 0.2s;
+      }
+      .stagger-3 {
+        transition-delay: 0.3s;
+      }
+      .stagger-4 {
+        transition-delay: 0.4s;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 text-gray-800 antialiased flex flex-col min-h-screen"
+  >
+    <!-- Navigation -->
+    <nav
+      style="
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      "
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-3"
+      >
+        <div class="flex items-center gap-3">
+          <a
+            href="#"
+            style="
+              display: flex;
+              align-items: center;
+              background: #fff;
+              border-radius: 8px;
+              padding: 4px 10px;
+              text-decoration: none;
+            "
+          >
+            <img
+              src="logo.jpg"
+              alt="JJ's Car Wash"
+              style="
+                height: 38px;
+                width: auto;
+                display: block;
+                object-fit: contain;
+              "
+            />
+          </a>
+          <span
+            style="
+              color: #fff;
+              font-family: &quot;Syne&quot;, sans-serif;
+              font-weight: 700;
+              font-size: 1.1rem;
+              letter-spacing: -0.01em;
+            "
+            class="hidden sm:block"
+            >JJ's Car Wash</span
+          >
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a
+            href="#services"
+            class="text-gray-300 hover:text-white font-medium transition text-sm tracking-wide"
+            >Services</a
+          >
+          <a
+            href="#reviews"
+            class="text-gray-300 hover:text-white font-medium transition text-sm tracking-wide"
+            >Reviews</a
+          >
+          <a
+            href="#location"
+            class="text-gray-300 hover:text-white font-medium transition text-sm tracking-wide"
+            >Contact</a
+          >
+        </div>
+        <a
+          href="tel:07404995853"
+          class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-secondary transition text-sm"
+        >
+          <i class="fa-solid fa-phone text-xs"> </i> 07404 995853
+        </a>
+      </div>
+    </nav>
+    <!-- Hero Section -->
+    <section
+      class="hero-carousel text-white px-4 sm:px-6 lg:px-8"
+      style="
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      "
+    >
+      <!-- Background slides -->
+      <div
+        class="hero-slide active"
+        style="background-image: url(&quot;hero1.jpg&quot;)"
+      ></div>
+      <div
+        class="hero-slide"
+        style="background-image: url(&quot;hero2.jpg&quot;)"
+      ></div>
+      <div
+        class="hero-slide"
+        style="background-image: url(&quot;hero3.jpg&quot;)"
+      ></div>
+      <div
+        class="hero-slide"
+        style="background-image: url(&quot;hero4.jpg&quot;)"
+      ></div>
+      <div
+        class="hero-slide"
+        style="background-image: url(&quot;hero5.jpg&quot;)"
+      ></div>
+      <!-- Deep navy overlay -->
+      <div class="hero-overlay"></div>
+      <!-- Content -->
+      <div class="hero-content max-w-7xl mx-auto text-center">
+        <!-- Star badge with glow -->
+        <div
+          class="fade-up-1 inline-flex items-center gap-2 star-badge bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 border border-white/30"
+        >
+          <div class="flex text-yellow-400 text-sm">
+            <i class="fa-solid fa-star"> </i> <i class="fa-solid fa-star"> </i>
+            <i class="fa-solid fa-star"> </i> <i class="fa-solid fa-star"> </i>
+            <i class="fa-solid fa-star-half-stroke"> </i>
+          </div>
+          <span class="text-sm font-semibold"
+            >4.5 (479 Reviews) · Oxford's Best</span
+          >
+        </div>
+        <!-- Heading -->
+        <h1 class="fade-up-2 hero-heading text-4xl md:text-6xl mb-4">
+          Premium Car Care in Oxford
+        </h1>
+        <!-- Travelling accent line -->
+        <div class="fade-up-2 accent-line"></div>
+        <!-- Subheading -->
+        <p
+          class="fade-up-3 text-xl md:text-2xl mb-10 text-blue-100 max-w-3xl mx-auto"
+        >
+          Professional exterior washing, detailed interior valets, and friendly
+          service you can trust.<br class="hidden md:block" />
+          Visit us at Kassam Stadium today!
+        </p>
+        <!-- CTAs -->
+        <div class="fade-up-4 flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="#location"
+            class="btn-shimmer bg-white text-primary px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-xl"
+          >
+            <i class="fa-solid fa-location-dot mr-2"> </i> Get Directions
+          </a>
+          <a
+            href="#services"
+            class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white/10 transition"
+          >
+            View Services
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- Carousel JS -->
+    <script>
+      (function () {
+        const slides = document.querySelectorAll(".hero-slide");
+        let current = 0;
+        setInterval(() => {
+          slides[current].classList.remove("active");
+          current = (current + 1) % slides.length;
+          slides[current].classList.add("active");
+        }, 5000);
+      })();
+    </script>
+    <!-- Highlights Section -->
+    <section class="py-0 overflow-hidden" style="background: #0f172a">
+      <div class="max-w-7xl mx-auto">
+        <!-- Top: label + heading -->
+        <div class="text-center pt-20 pb-14 px-4">
+          <p
+            style="
+              color: #1a56db;
+              font-size: 0.75rem;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.12em;
+            "
+            class="mb-3"
+          >
+            Why JJ's
+          </p>
+          <h2
+            class="font-heading text-3xl md:text-5xl font-black text-white mb-4"
+          >
+            Oxford's Most Trusted<br class="hidden md:block" />
+            Car Wash
+          </h2>
+          <p class="text-slate-400 text-lg max-w-lg mx-auto">
+            Every car treated like it's our own. No shortcuts, no compromise.
+          </p>
+        </div>
+        <!-- Stats row -->
+        <div class="grid grid-cols-1 md:grid-cols-3 border-t border-slate-800">
+          <!-- Stat 1 -->
+          <div
+            class="highlight-card group relative px-10 py-12 text-center border-b md:border-b-0 md:border-r border-slate-800 cursor-default overflow-hidden"
+          >
+            <div
+              class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  rgba(26, 86, 219, 0.12),
+                  transparent
+                );
+              "
+            ></div>
+            <div class="relative">
+              <div
+                class="highlight-icon w-14 h-14 mx-auto rounded-xl flex items-center justify-center text-xl mb-6"
+                style="background: rgba(26, 86, 219, 0.15); color: #60a5fa"
+              >
+                <i class="fa-solid fa-medal"> </i>
+              </div>
+              <div
+                class="font-heading font-black mb-1"
+                style="font-size: 3.5rem; line-height: 1; color: #fff"
+              >
+                <span class="count-up" data-target="479">0</span>
+                <span class="text-primary">+</span>
+              </div>
+              <div
+                style="
+                  font-size: 0.7rem;
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: 0.12em;
+                  color: #475569;
+                "
+                class="mb-5"
+              >
+                5-Star Google Reviews
+              </div>
+              <h3 class="font-heading font-bold text-white text-lg mb-2">
+                Top Quality Staff
+              </h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Well-trained professionals delivering spotless results, every
+                single time.
+              </p>
+            </div>
+          </div>
+          <!-- Stat 2 -->
+          <div
+            class="highlight-card group relative px-10 py-12 text-center border-b md:border-b-0 md:border-r border-slate-800 cursor-default overflow-hidden"
+          >
+            <div
+              class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  rgba(26, 86, 219, 0.12),
+                  transparent
+                );
+              "
+            ></div>
+            <div class="relative">
+              <div
+                class="highlight-icon w-14 h-14 mx-auto rounded-xl flex items-center justify-center text-xl mb-6"
+                style="background: rgba(26, 86, 219, 0.15); color: #60a5fa"
+              >
+                <i class="fa-solid fa-star"> </i>
+              </div>
+              <div
+                class="font-heading font-black mb-1"
+                style="font-size: 3.5rem; line-height: 1; color: #fff"
+              >
+                4.5<span class="text-primary" style="font-size: 2rem">★</span>
+              </div>
+              <div
+                style="
+                  font-size: 0.7rem;
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: 0.12em;
+                  color: #475569;
+                "
+                class="mb-5"
+              >
+                Google Rating
+              </div>
+              <h3 class="font-heading font-bold text-white text-lg mb-2">
+                Highly Rated
+              </h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Consistently rated one of Oxford's best car washes by hundreds
+                of verified Google customers.
+              </p>
+            </div>
+          </div>
+          <!-- Stat 3 -->
+          <div
+            class="highlight-card group relative px-10 py-12 text-center border-b md:border-b-0 border-slate-800 cursor-default overflow-hidden"
+          >
+            <div
+              class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  rgba(26, 86, 219, 0.12),
+                  transparent
+                );
+              "
+            ></div>
+            <div class="relative">
+              <div
+                class="highlight-icon w-14 h-14 mx-auto rounded-xl flex items-center justify-center text-xl mb-6"
+                style="background: rgba(26, 86, 219, 0.15); color: #60a5fa"
+              >
+                <i class="fa-solid fa-calendar-check"> </i>
+              </div>
+              <div
+                class="font-heading font-black mb-1"
+                style="font-size: 3.5rem; line-height: 1; color: #fff"
+              >
+                7<span class="text-primary" style="font-size: 2rem"> days</span>
+              </div>
+              <div
+                style="
+                  font-size: 0.7rem;
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: 0.12em;
+                  color: #475569;
+                "
+                class="mb-5"
+              >
+                Open Every Day
+              </div>
+              <h3 class="font-heading font-bold text-white text-lg mb-2">
+                Always Open
+              </h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Open 7 days a week from 9:00 AM. No appointment needed — just
+                drop in.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom CTA strip -->
+        <div
+          class="border-t border-slate-800 px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
+          <div class="flex items-center gap-3">
+            <div class="flex text-yellow-400">
+              <i class="fa-solid fa-star text-sm"> </i>
+              <i class="fa-solid fa-star text-sm"> </i>
+              <i class="fa-solid fa-star text-sm"> </i>
+              <i class="fa-solid fa-star text-sm"> </i>
+              <i class="fa-solid fa-star-half-stroke text-sm"> </i>
+            </div>
+            <span class="text-white font-bold">4.5</span>
+            <span class="text-slate-500 text-sm">· 479 reviews on Google</span>
+          </div>
+          <a
+            href="tel:07404995853"
+            class="btn-shimmer flex items-center gap-2 text-white font-bold px-6 py-3 rounded-lg text-sm transition"
+            style="background: #1a56db"
+          >
+            <i class="fa-solid fa-phone text-xs"> </i> Book Your Wash — 07404
+            995853
+          </a>
+        </div>
+      </div>
+    </section>
+    <style>
+      /* Highlight card hover */
+      .highlight-card {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .highlight-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .highlight-card:hover .highlight-icon {
+        transform: scale(1.08);
+        transition: transform 0.3s ease;
+      }
+      .highlight-icon {
+        transition: transform 0.3s ease;
+      }
+
+      /* Scroll Fade Animations */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .stagger-1 {
+        transition-delay: 0.1s;
+      }
+      .stagger-2 {
+        transition-delay: 0.2s;
+      }
+      .stagger-3 {
+        transition-delay: 0.3s;
+      }
+      .stagger-4 {
+        transition-delay: 0.4s;
+      }
+    </style>
+    <script>
+      (function () {
+        const counters = document.querySelectorAll(".count-up");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && !entry.target.dataset.done) {
+                entry.target.dataset.done = true;
+                const target = +entry.target.dataset.target;
+                const duration = 1500;
+                const step = target / (duration / 16);
+                let current = 0;
+                const timer = setInterval(() => {
+                  current = Math.min(current + step, target);
+                  entry.target.textContent = Math.floor(current);
+                  if (current >= target) clearInterval(timer);
+                }, 16);
+              }
+            });
+          },
+          {
+            threshold: 0.3,
+          },
+        );
+        counters.forEach((c) => observer.observe(c));
+      })();
+    </script>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <p
+            class="text-primary text-sm font-bold uppercase tracking-widest mb-3"
+          >
+            What We Offer
+          </p>
+          <h2
+            class="text-4xl md:text-5xl font-heading font-black text-slate-900 mb-6"
+          >
+            Choose Your Service
+          </h2>
+          <p class="text-slate-500 text-lg">
+            From a quick exterior wash to a full deep-clean valet — we've got
+            you covered with premium service at every level.
+          </p>
+        </div>
+
+        <!-- Pricing Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mt-12">
+          <!-- Wash & Go -->
+          <div
+            class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition duration-300 relative overflow-hidden group flex flex-col"
+          >
+            <div class="h-56 w-full relative overflow-hidden">
+              <img
+                src="svc_wash.jpg"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                alt="Wash &amp; Go"
+              />
+            </div>
+
+            <div class="p-8 flex flex-col flex-1">
+              <h3 class="font-heading font-bold text-2xl text-slate-900 mb-2">
+                Wash &amp; Go
+              </h3>
+              <p class="text-slate-500 text-sm mb-8 h-10">
+                A fast, thorough exterior wash — hand-dried and tyre-shined.
+              </p>
+
+              <ul class="space-y-4 mb-8 flex-1">
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-check text-primary mt-1"></i>
+                  <span class="text-slate-700 font-medium text-sm"
+                    >Full exterior hand wash</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-check text-primary mt-1"></i>
+                  <span class="text-slate-700 font-medium text-sm"
+                    >Professional hand-drying</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-check text-primary mt-1"></i>
+                  <span class="text-slate-700 font-medium text-sm"
+                    >Tyre shine &amp; wheel clean</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-check text-primary mt-1"></i>
+                  <span class="text-slate-700 font-medium text-sm"
+                    >Window exterior wipe</span
+                  >
+                </li>
+              </ul>
+
+              <a
+                href="tel:07404995853"
+                class="block w-full py-4 px-6 bg-slate-100 text-slate-900 font-bold text-center rounded-xl hover:bg-slate-200 transition mt-auto"
+              >
+                Book Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Full Valet (Highlighted) -->
+          <div
+            class="bg-dark rounded-3xl shadow-2xl border border-slate-700 relative transform md:-translate-y-4 z-10 flex flex-col overflow-hidden group"
+          >
+            <div class="absolute top-4 left-4 z-20">
+              <span
+                class="bg-yellow-400 text-yellow-900 text-xs font-black uppercase tracking-wider py-1.5 px-4 rounded-full shadow-lg"
+              >
+                ⭐ Most Popular
+              </span>
+            </div>
+
+            <div class="h-60 w-full relative overflow-hidden">
+              <div class="absolute inset-0 bg-slate-900/20 z-10"></div>
+              <img
+                src="svc_full.jpg"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                alt="Full Valet"
+              />
+            </div>
+
+            <div class="p-8 flex flex-col flex-1">
+              <h3 class="font-heading font-bold text-2xl text-white mb-2">
+                Full Valet
+              </h3>
+              <p class="text-slate-400 text-sm mb-8 h-10">
+                A comprehensive deep clean inside and out. Your car will feel
+                brand new.
+              </p>
+
+              <ul class="space-y-4 mb-8 flex-1">
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"
+                  >
+                    <i class="fa-solid fa-check text-primary text-xs"></i>
+                  </div>
+                  <span class="text-slate-200 font-medium text-sm"
+                    >Everything in Mini-Valet</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"
+                  >
+                    <i class="fa-solid fa-check text-primary text-xs"></i>
+                  </div>
+                  <span class="text-slate-200 font-medium text-sm"
+                    >Wet vacuum — seats &amp; boot</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"
+                  >
+                    <i class="fa-solid fa-check text-primary text-xs"></i>
+                  </div>
+                  <span class="text-slate-200 font-medium text-sm"
+                    >Full carpet shampoo</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"
+                  >
+                    <i class="fa-solid fa-check text-primary text-xs"></i>
+                  </div>
+                  <span class="text-slate-200 font-medium text-sm"
+                    >Leather &amp; trim conditioning</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"
+                  >
+                    <i class="fa-solid fa-check text-primary text-xs"></i>
+                  </div>
+                  <span class="text-slate-200 font-medium text-sm"
+                    >Air freshener finish</span
+                  >
+                </li>
+              </ul>
+
+              <a
+                href="tel:07404995853"
+                class="btn-shimmer block w-full py-4 px-6 bg-primary text-white font-bold text-center rounded-xl hover:bg-secondary transition shadow-lg shadow-primary/30 mt-auto"
+              >
+                Call to Book
+              </a>
+            </div>
+          </div>
+
+          <!-- Mini-Valet -->
+          <div
+            class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition duration-300 relative overflow-hidden group flex flex-col"
+          >
+            <div class="h-56 w-full relative overflow-hidden">
+              <img
+                src="svc_mini.jpg"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                alt="Mini-Valet"
+              />
+            </div>
+
+            <div class="p-8 flex flex-col flex-1">
+              <h3 class="font-heading font-bold text-2xl text-slate-900 mb-2">
+                Mini-Valet
+              </h3>
+              <p class="text-slate-500 text-sm mb-8 h-10">
+                The perfect balance — exterior wash plus a thorough interior
+                clean.
+              </p>
+
+              <ul class="space-y-4 mb-8 flex-1">
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-check text-primary mt-1"></i>
+                  <span class="text-slate-700 font-medium text-sm"
+                    >Everything in Wash &amp; Go</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-check text-primary mt-1"></i>
+                  <span class="text-slate-700 font-medium text-sm"
+                    >Full interior vacuum</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-check text-primary mt-1"></i>
+                  <span class="text-slate-700 font-medium text-sm"
+                    >Dashboard &amp; console wipe</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-check text-primary mt-1"></i>
+                  <span class="text-slate-700 font-medium text-sm"
+                    >Door pad &amp; interior glass</span
+                  >
+                </li>
+              </ul>
+
+              <a
+                href="tel:07404995853"
+                class="block w-full py-4 px-6 bg-slate-100 text-slate-900 font-bold text-center rounded-xl hover:bg-slate-200 transition mt-auto"
+              >
+                Book Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section
+      id="reviews"
+      class="py-24 relative overflow-hidden"
+      style="background: #0f172a"
+    >
+      <!-- Decorative background glow -->
+      <div
+        class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
+      >
+        <div
+          class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full opacity-20 blur-[120px]"
+          style="
+            background: radial-gradient(circle, #1a56db 0%, transparent 70%);
+          "
+        ></div>
+        <div
+          class="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full opacity-10 blur-[100px]"
+          style="
+            background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+          "
+        ></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-20">
+          <p
+            class="text-primary text-sm font-bold uppercase tracking-widest mb-3"
+          >
+            Testimonials
+          </p>
+          <h2
+            class="text-4xl md:text-5xl font-heading font-black text-white mb-6"
+          >
+            What Our Customers Say
+          </h2>
+
+          <div
+            class="flex justify-center items-center gap-3 bg-slate-800/50 w-fit mx-auto px-6 py-3 rounded-full border border-slate-700/50 backdrop-blur-md"
+          >
+            <div class="flex text-yellow-400 text-lg">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star-half-stroke"></i>
+            </div>
+            <span class="text-white font-bold text-lg">4.5</span>
+            <span class="text-slate-400 text-sm border-l border-slate-600 pl-3"
+              >479 reviews on Google</span
+            >
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 gap-y-12 md:gap-y-8">
+          <!-- Review 1 (Mark Pritchard) -->
+          <div
+            class="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
+          >
+            <div
+              class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
+            >
+              <i class="fa-solid fa-quote-right text-6xl"></i>
+            </div>
+            <div class="flex text-yellow-400 text-sm mb-6 gap-1">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i>
+            </div>
+            <p
+              class="text-slate-300 text-base leading-relaxed mb-10 flex-1 relative z-10 font-medium"
+            >
+              "What a find! So many of these car wash places have just slipped
+              away, over charging and barely grafting. Not so JJs - my Audi was
+              looking sorry for itself after the winter, and I'm honestly
+              astonished how well these guys turned it around. Deep clean inside
+              and out. Feels like new. Well worth crossing town for. Thanks so
+              much!"
+            </p>
+            <div
+              class="flex items-center justify-between pt-6 border-t border-slate-700/50"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center text-white font-heading font-bold text-xl shadow-inner"
+                  style="background: linear-gradient(135deg, #3b82f6, #1d4ed8)"
+                >
+                  M
+                </div>
+                <div>
+                  <div class="text-white font-bold text-sm tracking-wide">
+                    Mark Pritchard
+                  </div>
+                  <div class="text-slate-400 text-xs font-semibold mt-0.5">
+                    Verified Customer
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-lg"
+              >
+                <i class="fa-brands fa-google text-blue-500 text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2 (muji) -->
+          <div
+            class="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl md:-translate-y-6"
+          >
+            <div
+              class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
+            >
+              <i class="fa-solid fa-quote-right text-6xl"></i>
+            </div>
+            <div class="flex text-yellow-400 text-sm mb-6 gap-1">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i>
+            </div>
+            <p
+              class="text-slate-300 text-base leading-relaxed mb-10 flex-1 relative z-10 font-medium"
+            >
+              "This carwash is amazing they do a proper job, great attention to
+              detail. Always happy here. Definitely recommend"
+            </p>
+            <div
+              class="flex items-center justify-between pt-6 border-t border-slate-700/50"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center text-white font-heading font-bold text-xl shadow-inner"
+                  style="background: linear-gradient(135deg, #10b981, #047857)"
+                >
+                  M
+                </div>
+                <div>
+                  <div class="text-white font-bold text-sm tracking-wide">
+                    muji
+                  </div>
+                  <div class="text-primary text-xs font-semibold mt-0.5">
+                    Local Guide
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-lg"
+              >
+                <i class="fa-brands fa-google text-blue-500 text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3 (Pharaoh Golf Co.) -->
+          <div
+            class="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
+          >
+            <div
+              class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
+            >
+              <i class="fa-solid fa-quote-right text-6xl"></i>
+            </div>
+            <div class="flex text-yellow-400 text-sm mb-6 gap-1">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i>
+            </div>
+            <p
+              class="text-slate-300 text-base leading-relaxed mb-10 flex-1 relative z-10 font-medium"
+            >
+              "My truck is gleaming! Awesome job by the guys at JJ’s. The care,
+              helpfulness of helping empty my truck and their attention to
+              detail is second to none. Highly recommend and will be swinging by
+              when I’m next in the area. Feel like I’m driving a brand new truck
+              again 🧡"
+            </p>
+            <div
+              class="flex items-center justify-between pt-6 border-t border-slate-700/50"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center text-white font-heading font-bold text-xl shadow-inner"
+                  style="background: linear-gradient(135deg, #f59e0b, #b45309)"
+                >
+                  P
+                </div>
+                <div>
+                  <div class="text-white font-bold text-sm tracking-wide">
+                    Pharaoh Golf Co.
+                  </div>
+                  <div class="text-slate-400 text-xs font-semibold mt-0.5">
+                    Verified Customer
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-lg"
+              >
+                <i class="fa-brands fa-google text-blue-500 text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 4 (Ghalib Ghalib) -->
+          <div
+            class="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
+          >
+            <div
+              class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
+            >
+              <i class="fa-solid fa-quote-right text-6xl"></i>
+            </div>
+            <div class="flex text-yellow-400 text-sm mb-6 gap-1">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i>
+            </div>
+            <p
+              class="text-slate-300 text-base leading-relaxed mb-10 flex-1 relative z-10 font-medium"
+            >
+              "If you want a premium car wash this is the place to go to they
+              take proper car into making sure your car leaves like it left the
+              showroom the day you bought it. All the staff are friendly and
+              very helpful in getting you the right package for your vehicle. I
+              would 100% recommend going here for premium wash and care."
+            </p>
+            <div
+              class="flex items-center justify-between pt-6 border-t border-slate-700/50"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center text-white font-heading font-bold text-xl shadow-inner"
+                  style="background: linear-gradient(135deg, #8b5cf6, #5b21b6)"
+                >
+                  G
+                </div>
+                <div>
+                  <div class="text-white font-bold text-sm tracking-wide">
+                    Ghalib Ghalib
+                  </div>
+                  <div class="text-primary text-xs font-semibold mt-0.5">
+                    Local Guide
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-lg"
+              >
+                <i class="fa-brands fa-google text-blue-500 text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 5 (Wz Ghost) -->
+          <div
+            class="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl md:-translate-y-6"
+          >
+            <div
+              class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
+            >
+              <i class="fa-solid fa-quote-right text-6xl"></i>
+            </div>
+            <div class="flex text-yellow-400 text-sm mb-6 gap-1">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i>
+            </div>
+            <p
+              class="text-slate-300 text-base leading-relaxed mb-10 flex-1 relative z-10 font-medium"
+            >
+              "Professional job. Very quick and detailed cleaning every time.
+              Very happy with the service these guys give you. Thank you and
+              definitely recommend to everyone."
+            </p>
+            <div
+              class="flex items-center justify-between pt-6 border-t border-slate-700/50"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center text-white font-heading font-bold text-xl shadow-inner"
+                  style="background: linear-gradient(135deg, #ef4444, #b91c1c)"
+                >
+                  W
+                </div>
+                <div>
+                  <div class="text-white font-bold text-sm tracking-wide">
+                    Wz Ghost
+                  </div>
+                  <div class="text-slate-400 text-xs font-semibold mt-0.5">
+                    Verified Customer
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-lg"
+              >
+                <i class="fa-brands fa-google text-blue-500 text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 6 (Usman Butt) -->
+          <div
+            class="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
+          >
+            <div
+              class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
+            >
+              <i class="fa-solid fa-quote-right text-6xl"></i>
+            </div>
+            <div class="flex text-yellow-400 text-sm mb-6 gap-1">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i>
+            </div>
+            <p
+              class="text-slate-300 text-base leading-relaxed mb-10 flex-1 relative z-10 font-medium"
+            >
+              "One of the best car washes in Oxford. The team is well trained
+              and professional. Has a nice sitting place too. Special thanks to
+              Sarhat for putting in a lot of effort in his work."
+            </p>
+            <div
+              class="flex items-center justify-between pt-6 border-t border-slate-700/50"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center text-white font-heading font-bold text-xl shadow-inner"
+                  style="background: linear-gradient(135deg, #06b6d4, #0e7490)"
+                >
+                  U
+                </div>
+                <div>
+                  <div class="text-white font-bold text-sm tracking-wide">
+                    Usman Butt
+                  </div>
+                  <div class="text-slate-400 text-xs font-semibold mt-0.5">
+                    Verified Customer
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-lg"
+              >
+                <i class="fa-brands fa-google text-blue-500 text-sm"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location & Contact -->
+    <section id="location" class="relative py-32 overflow-hidden">
+      <!-- Background -->
+      <div class="absolute inset-0">
+        <img
+          src="hero2.jpg"
+          class="w-full h-full object-cover object-center"
+          alt="JJ's Car Wash Background"
+        />
+      </div>
+      <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-[2px]"></div>
+
+      <!-- Decorative Gradient -->
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none"
+      ></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <p
+            class="text-primary text-sm font-bold uppercase tracking-widest mb-3"
+          >
+            Find Us
+          </p>
+          <h2
+            class="text-4xl md:text-5xl font-heading font-black text-white mb-6"
+          >
+            Visit Us at Kassam Stadium
+          </h2>
+          <p class="text-slate-300 text-lg">
+            Drop in anytime from 9am — no appointment needed. We're ready when
+            you are.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center bg-slate-800/40 backdrop-blur-md rounded-[2.5rem] border border-slate-700/50 p-6 sm:p-10 lg:p-12 shadow-2xl"
+        >
+          <!-- Contact Details -->
+          <div class="lg:col-span-5 space-y-8">
+            <div class="flex items-start gap-5 group">
+              <div
+                class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 group-hover:border-primary/30 group-hover:scale-110 transition duration-300 shadow-inner"
+              >
+                <i
+                  class="fa-solid fa-map-location-dot text-2xl text-primary"
+                ></i>
+              </div>
+              <div>
+                <h4 class="font-heading font-bold text-white text-xl mb-1.5">
+                  Location
+                </h4>
+                <p class="text-slate-400 leading-relaxed text-sm">
+                  Kassam Stadium, Grenoble Rd<br />Littlemore, Oxford OX4 4XP
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-5 group">
+              <div
+                class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 group-hover:border-primary/30 group-hover:scale-110 transition duration-300 shadow-inner"
+              >
+                <i class="fa-solid fa-clock text-2xl text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-heading font-bold text-white text-xl mb-1.5">
+                  Opening Hours
+                </h4>
+                <p class="text-slate-400 leading-relaxed text-sm">
+                  Open Daily<br />9:00 AM — 6:00 PM
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-5 group">
+              <div
+                class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 group-hover:border-primary/30 group-hover:scale-110 transition duration-300 shadow-inner"
+              >
+                <i class="fa-solid fa-phone text-2xl text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-heading font-bold text-white text-xl mb-1.5">
+                  Call Us
+                </h4>
+                <p class="text-slate-400 leading-relaxed text-lg font-semibold">
+                  07404 995853
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="h-px w-full bg-gradient-to-r from-transparent via-slate-700 to-transparent my-10"
+            ></div>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href="tel:07404995853"
+                class="flex-1 btn-shimmer flex items-center justify-center gap-2 bg-primary text-white font-bold py-4 rounded-xl hover:bg-secondary transition shadow-lg shadow-primary/30 text-sm"
+              >
+                <i class="fa-solid fa-phone"></i> Call Now
+              </a>
+              <a
+                href="https://wa.me/447404995853"
+                target="_blank"
+                class="flex-1 flex items-center justify-center gap-2 bg-green-500 text-white font-bold py-4 rounded-xl hover:bg-green-600 transition shadow-lg shadow-green-500/30 text-sm"
+              >
+                <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
+              </a>
+            </div>
+            <a
+              href="https://maps.google.com/?q=Kassam+Stadium+Oxford"
+              target="_blank"
+              class="w-full flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold py-4 rounded-xl hover:bg-white/10 transition mt-4 text-sm"
+            >
+              <i class="fa-solid fa-location-arrow"></i> Get Directions
+            </a>
+          </div>
+
+          <!-- Map -->
+          <div
+            class="lg:col-span-7 h-[450px] lg:h-[550px] w-full rounded-[2rem] overflow-hidden border-[6px] border-slate-700/30 shadow-2xl relative group bg-slate-900"
+          >
+            <div
+              class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition duration-700 pointer-events-none z-10"
+            ></div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2471.936083049052!2d-1.2098670840428945!3d51.716175979672724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876c123456789%3A0x1234567890abcdef!2sKassam%20Stadium!5e0!3m2!1sen!2suk!4v1620000000000!5m2!1sen!2suk"
+              width="100%"
+              height="100%"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              class="relative z-0 opacity-80 group-hover:opacity-100 grayscale-[0.5] group-hover:grayscale-0 transition duration-700"
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #0f172a" class="border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <!-- Col 1: Brand -->
+          <div>
+            <div class="bg-white rounded-lg px-2 py-1 inline-block mb-4">
+              <img
+                src="logo.jpg"
+                alt="JJ's Car Wash"
+                class="h-8 w-auto object-contain"
+              />
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Oxford's premier hand car wash, located at Kassam Stadium.
+              Professional results, every time.
+            </p>
+          </div>
+          <!-- Col 2: Quick links -->
+          <div>
+            <h4
+              class="font-heading font-bold text-white mb-4 text-sm uppercase tracking-widest"
+            >
+              Quick Links
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="#services"
+                  class="text-slate-400 hover:text-white transition"
+                  >Services & Pricing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#reviews"
+                  class="text-slate-400 hover:text-white transition"
+                  >Customer Reviews</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#location"
+                  class="text-slate-400 hover:text-white transition"
+                  >Location & Hours</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Col 3: Contact -->
+          <div>
+            <h4
+              class="font-heading font-bold text-white mb-4 text-sm uppercase tracking-widest"
+            >
+              Get In Touch
+            </h4>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-center gap-2 text-slate-400">
+                <i class="fa-solid fa-phone text-primary w-4"> </i> 07404 995853
+              </li>
+              <li class="flex items-center gap-2 text-slate-400">
+                <i class="fa-solid fa-map-pin text-primary w-4"> </i> Kassam
+                Stadium, Oxford OX4 4XP
+              </li>
+              <li class="flex items-center gap-2 text-slate-400">
+                <i class="fa-solid fa-clock text-primary w-4"> </i> Open daily
+                from 9:00 AM
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-t border-slate-800 py-5 text-center text-slate-600 text-xs"
+      >
+        &copy; 2026 JJ's Car Wash, Oxford. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Scroll Animations -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const selectors = [
+          "section h2",
+          "section p",
+          "#highlights .grid > div",
+          "#services .grid > div",
+          "#reviews .grid > div",
+          "#location .grid > div",
+          "footer .grid > div",
+        ];
+
+        const elements = document.querySelectorAll(selectors.join(", "));
+
+        elements.forEach((el) => {
+          if (!el.closest(".hero-carousel")) {
+            el.classList.add("fade-up");
+          }
+        });
+
+        document.querySelectorAll(".grid").forEach((grid) => {
+          Array.from(grid.children).forEach((child, index) => {
+            if (child.classList.contains("fade-up")) {
+              const delayClass = "stagger-" + ((index % 4) + 1);
+              child.classList.add(delayClass);
+            }
+          });
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -50px 0px", threshold: 0.05 },
+        );
+
+        document
+          .querySelectorAll(".fade-up")
+          .forEach((el) => observer.observe(el));
+      });
+    </script>
+  </body>
+</html>
