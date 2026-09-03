@@ -1556,8 +1556,9 @@
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const selectors = [
-          "section h2",
-          "section p",
+          ".hero-content h1",
+          "section .text-center h2",
+          "section .text-center p",
           "#highlights .highlight-card",
           "#services .grid > div",
           "#reviews .snap-center",
@@ -1593,7 +1594,7 @@
               }
             });
           },
-          { rootMargin: "0px 0px 50px 0px", threshold: 0 },
+          { rootMargin: "0px 50px 50px 50px", threshold: 0 },
         );
 
         document
