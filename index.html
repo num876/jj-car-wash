@@ -203,15 +203,15 @@
       /* Scroll Fade Animations */
       .fade-up {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px) translateZ(0);
+        backface-visibility: hidden;
         transition:
-          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        /* will-change removed for memory perf */
+          opacity 0.6s ease-out,
+          transform 0.6s ease-out;
       }
       .fade-up.visible {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) translateZ(0);
       }
       .stagger-1 {
         transition-delay: 0.1s;
@@ -578,15 +578,15 @@
       /* Scroll Fade Animations */
       .fade-up {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px) translateZ(0);
+        backface-visibility: hidden;
         transition:
-          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        /* will-change removed for memory perf */
+          opacity 0.6s ease-out,
+          transform 0.6s ease-out;
       }
       .fade-up.visible {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) translateZ(0);
       }
       .stagger-1 {
         transition-delay: 0.1s;
@@ -1558,9 +1558,9 @@
         const selectors = [
           "section h2",
           "section p",
-          "#highlights .grid > div",
+          "#highlights .highlight-card",
           "#services .grid > div",
-          "#reviews .grid > div",
+          "#reviews .snap-center",
           "#location .grid > div",
           "footer .grid > div",
         ];
@@ -1573,12 +1573,14 @@
           }
         });
 
-        document.querySelectorAll(".grid").forEach((grid) => {
-          Array.from(grid.children).forEach((child, index) => {
-            if (child.classList.contains("fade-up")) {
-              const delayClass = "stagger-" + ((index % 4) + 1);
-              child.classList.add(delayClass);
-            }
+        const staggerContainers = document.querySelectorAll(
+          "#highlights, #services, #reviews, #location, footer",
+        );
+        staggerContainers.forEach((container) => {
+          const children = container.querySelectorAll(".fade-up");
+          Array.from(children).forEach((child, index) => {
+            const delayClass = "stagger-" + ((index % 4) + 1);
+            child.classList.add(delayClass);
           });
         });
 
@@ -1591,7 +1593,7 @@
               }
             });
           },
-          { rootMargin: "0px 0px -50px 0px", threshold: 0.05 },
+          { rootMargin: "0px 0px 50px 0px", threshold: 0 },
         );
 
         document
