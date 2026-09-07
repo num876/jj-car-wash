@@ -225,18 +225,23 @@
       .stagger-4 {
         transition-delay: 0.4s;
       }
-      /* Mobile: always show content, no fade animations */
-      @media (max-width: 768px) {
+      /* Mobile Layout Guarantees */
+      @media (max-width: 1024px) {
         .fade-up {
           opacity: 1 !important;
           transform: none !important;
           transition: none !important;
+          animation: none !important;
+        }
+        /* Fix Google Maps white flash by forcing the container background */
+        iframe {
+          background-color: #0f172a !important;
         }
       }
     </style>
   </head>
   <body
-    class="bg-slate-50 text-gray-800 antialiased flex flex-col min-h-screen"
+    class="bg-slate-50 text-gray-800 antialiased"
   >
     <!-- Navigation -->
     <nav
@@ -929,7 +934,7 @@
         >
           <!-- Review 1 (Mark Pritchard) -->
           <div
-            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800/90 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
+            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
           >
             <div
               class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
@@ -980,7 +985,7 @@
 
           <!-- Review 2 (muji) -->
           <div
-            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800/90 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl md:-translate-y-6"
+            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl md:-translate-y-6"
           >
             <div
               class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
@@ -1027,7 +1032,7 @@
 
           <!-- Review 3 (Pharaoh Golf Co.) -->
           <div
-            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800/90 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
+            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
           >
             <div
               class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
@@ -1077,7 +1082,7 @@
 
           <!-- Review 4 (Ghalib Ghalib) -->
           <div
-            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800/90 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
+            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
           >
             <div
               class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
@@ -1127,7 +1132,7 @@
 
           <!-- Review 5 (Wz Ghost) -->
           <div
-            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800/90 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl md:-translate-y-6"
+            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl md:-translate-y-6"
           >
             <div
               class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
@@ -1175,7 +1180,7 @@
 
           <!-- Review 6 (Usman Butt) -->
           <div
-            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800/90 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
+            class="snap-center shrink-0 w-[85vw] md:w-auto bg-slate-800 border border-slate-700/50 rounded-[2rem] p-8 sm:p-10 hover:bg-slate-800/80 transition duration-500 group relative flex flex-col h-full hover:-translate-y-2 shadow-2xl"
           >
             <div
               class="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition duration-500"
@@ -1230,14 +1235,14 @@
       class="relative py-16 sm:py-32 overflow-hidden bg-slate-900"
     >
       <!-- Background -->
-      <div class="absolute inset-0">
+      <div class="absolute inset-0 hidden md:block">
         <img
           src="hero2.jpg"
           class="w-full h-full object-cover object-center"
           alt="JJ's Car Wash Background"
         />
       </div>
-      <div class="absolute inset-0 bg-slate-900/95"></div>
+      <div class="absolute inset-0 bg-slate-900 md:bg-slate-900/95"></div>
 
       <!-- Decorative Gradient -->
       <div
@@ -1270,7 +1275,7 @@
         </div>
 
         <div
-          class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center bg-slate-800/90 rounded-[2rem] sm:rounded-[2.5rem] border border-slate-700/50 p-5 sm:p-8 lg:p-12 shadow-2xl"
+          class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center bg-slate-800 rounded-[2rem] sm:rounded-[2.5rem] border border-slate-700/50 p-5 sm:p-8 lg:p-12 shadow-2xl"
         >
           <!-- Contact Details -->
           <div class="lg:col-span-5 space-y-6 sm:space-y-8">
@@ -1363,11 +1368,10 @@
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2471.936083049052!2d-1.2098670840428945!3d51.716175979672724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876c123456789%3A0x1234567890abcdef!2sKassam%20Stadium!5e0!3m2!1sen!2suk!4v1620000000000!5m2!1sen!2suk"
               width="100%"
               height="100%"
-              style="border: 0"
+              style="border: 0; background-color: #0f172a;"
               allowfullscreen=""
               loading="lazy"
-              class="relative z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
-              onload="this.style.opacity = '0.9'"
+              class="relative z-0 opacity-90 hover:opacity-100 transition-opacity duration-300 rounded-[1.5rem] sm:rounded-[2rem]"
             >
             </iframe>
           </div>
@@ -1519,7 +1523,7 @@
               Opening Hours
             </h4>
             <div
-              class="bg-slate-800/90 rounded-2xl p-5 border border-slate-700/50 shadow-xl"
+              class="bg-slate-800 rounded-2xl p-5 border border-slate-700/50 shadow-xl"
             >
               <ul class="space-y-3 text-sm">
                 <li class="flex justify-between items-center text-slate-300">
@@ -1567,6 +1571,13 @@
     <!-- Scroll Animations -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        // MOBILE REHAUL: Disable all JS-based scroll animations on mobile screens
+        // This guarantees rock-solid rendering on iOS Safari
+        if (window.innerWidth < 1024) {
+          const fadeEls = document.querySelectorAll('.fade-up');
+          fadeEls.forEach(el => el.classList.remove('fade-up'));
+          return;
+        }
         const selectors = [
           "#highlights .highlight-card",
           "#services .grid > div",
