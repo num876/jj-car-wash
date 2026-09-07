@@ -1556,7 +1556,6 @@
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const selectors = [
-          ".hero-content h1",
           "section .text-center h2",
           "section .text-center p",
           "#highlights .highlight-card",
@@ -1585,21 +1584,45 @@
           });
         });
 
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-              }
-            });
+        // Reveal function that checks if element is in or above viewport
+        function revealElements() {
+          const fadeEls = document.querySelectorAll(".fade-up:not(.visible)");
+          fadeEls.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            const windowHeight =
+              window.innerHeight || document.documentElement.clientHeight;
+            // Trigger when element top is within 300px below the viewport bottom
+            if (rect.top < windowHeight + 300) {
+              el.classList.add("visible");
+            }
+          });
+        }
+
+        // Run on scroll with passive listener for performance
+        let ticking = false;
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (!ticking) {
+              window.requestAnimationFrame(() => {
+                revealElements();
+                ticking = false;
+              });
+              ticking = true;
+            }
           },
-          { rootMargin: "200px", threshold: 0 },
+          { passive: true },
         );
 
-        document
-          .querySelectorAll(".fade-up")
-          .forEach((el) => observer.observe(el));
+        // Also run on resize (orientation change on mobile)
+        window.addEventListener("resize", revealElements, { passive: true });
+
+        // Run immediately to catch anything already in view
+        revealElements();
+
+        // Run again after a short delay to catch late-loading content
+        setTimeout(revealElements, 500);
+        setTimeout(revealElements, 1500);
       });
     </script>
   </body>
