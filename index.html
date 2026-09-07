@@ -225,6 +225,14 @@
       .stagger-4 {
         transition-delay: 0.4s;
       }
+      /* Mobile: always show content, no fade animations */
+      @media (max-width: 768px) {
+        .fade-up {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+      }
     </style>
   </head>
   <body
